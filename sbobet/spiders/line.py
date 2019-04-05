@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from scrapy import Spider, Request
-from soccerway.items import Match
+from sbobet.items import Match
 from urllib.parse import parse_qs
 from datetime import date, datetime, timezone, timedelta
 #from soccerway.competitions import competitions_id_list
@@ -25,7 +25,7 @@ class LineSpider(Spider):
     def parse_index(self, response):
         base_url = 'https://www.sbobet.com'
         links = response.xpath('//div[@class="MarketT Open"]//a[@class="IconMarkets"]/@href').extract()
-        for l in links[:10]:
+        for l in links:
             #self.log('URL: {}'.format(start_url+l))
             request = Request(url=base_url+l, callback=self.parse_match)
             request.meta['proxy'] = 'http://127.0.0.1:8118'
@@ -42,4 +42,5 @@ class LineSpider(Spider):
         item['data'] = s2
         item['updated'] = datetime.utcnow().isoformat(' ')
         self.log('{}${}'.format(response.url, s2))
+        yield item
 
