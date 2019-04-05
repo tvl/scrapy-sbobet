@@ -1,6 +1,6 @@
 #!/bin/bash
-TODAY="$(date --date=today +'%Y%m%d')"
-TOMORROW="$(date --date=tomorrow +'%Y%m%d')"
+TODAY="$(date --date=today +'%Y-%m-%d')"
+TOMORROW="$(date --date=tomorrow +'%Y-%m-%d')"
 
 echo "Dates $TODAY, $TOMORROW"
 
