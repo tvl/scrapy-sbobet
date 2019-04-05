@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from scrapy import Spider, Request
-#from soccerway.items import MatchInfo
+from soccerway.items import Match
 from urllib.parse import parse_qs
 from datetime import date, datetime, timezone, timedelta
 #from soccerway.competitions import competitions_id_list
@@ -32,11 +32,14 @@ class LineSpider(Spider):
             yield request
 
     def parse_match(self, response):
+        item = Match()
         s = response.xpath('//script/text()')[-1].extract()
         s2 = s[s.find('['):-4]
         #p1 = [i for i in range(len(s2)) if s2.startswith('[', i)]
         #p2 = [i for i in range(len(s2)) if s2.startswith(']', i)]
         #odds = eval(s2[p1[6]:p2[-8]+1])
-
+        item['url'] = response.url
+        item['data'] = s2
+        item['updated'] = datetime.utcnow().isoformat(' ')
         self.log('{}${}'.format(response.url, s2))
 
