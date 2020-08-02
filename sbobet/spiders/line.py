@@ -12,7 +12,8 @@ class LineSpider(Spider):
     today  = date.today()
     tomorrow  = date.today()+timedelta(days=1)
     start_urls = [
-            'file:///home/tvl/dev/scrapy-sbobet/sbobet/tomorrow.html'
+            'file:///home/tvl/src/scrapy-sbobet/sbobet/today.html',
+            'file:///home/tvl/src/scrapy-sbobet/sbobet/tomorrow.html'
             #'https://www.sbobet.com/euro/football/{}'.format(tomorrow.isoformat())
             ]
 

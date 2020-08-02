@@ -9,5 +9,13 @@ echo "Dates $TODAY, $TOMORROW"
 #chromium-browser --headless --proxy-server="socks://127.0.0.1:9050" --dump-dom \
 #    http://www.oddsportal.com/matches/soccer/$TOMORROW/ > tomorrow.html
 
-chromium-browser --headless  --dump-dom https://www.sbobet.com/euro/football/$TOMORROW/ > tomorrow.html
+#chromium-browser --headless  --dump-dom https://www.sbobet.com/euro/football/$TOMORROW/ > tomorrow.html
 
+docker run --init --rm --name chrome01 --shm-size=1024m --cap-add=SYS_ADMIN \
+	--entrypoint=/usr/bin/google-chrome-unstable \
+	yukinying/chrome-headless-browser \
+	--headless --disable-gpu --dump-dom https://www.sbobet.com/euro/football/ > today.html
+docker run --init --rm --name chrome02 --shm-size=1024m --cap-add=SYS_ADMIN \
+	--entrypoint=/usr/bin/google-chrome-unstable \
+	yukinying/chrome-headless-browser \
+	--headless --disable-gpu --dump-dom https://www.sbobet.com/euro/football/$TOMORROW/ > tomorrow.html
